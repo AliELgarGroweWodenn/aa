@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Flask App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: black; /* Arka plan rengini siyah yap */
+            color: white; /* Yazı rengini beyaz yap */
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        #chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto; /* Kutucuğu ortala */
+            background-color: black; /* Kutucuğun arkaplan rengini siyah yap */
+            color: white; /* Kutucuğun yazı rengini beyaz yap */
+        }
+
+        .user-message {
+            color: blue;
+        }
+
+        .assistant-message {
+            color: green;
+        }
+
+        .system-message {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>ChatGPT Flask App</h1>
+
+    <form method="post" action="/">
+        <label for="user_input" style="color: white;">Your Message:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <div id="chat-box">
+        {% for message in messages %}
+            {% if message.role == 'user' %}
+                <p class="user-message">User: {{ message.content }}</p>
+            {% elif message.role == 'assistant' %}
+                <p class="assistant-message">Assistant: {{ message.content }}</p>
+            {% elif message.role == 'system' %}
+                <p class="system-message">System: {{ message.content }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
